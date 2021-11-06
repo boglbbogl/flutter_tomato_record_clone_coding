@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tomato_record_clone_coding/router/locations.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/start_screen.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/splash_screen.dart';
+import 'package:flutter_tomato_record_clone_coding/status/user_provider.dart';
+import 'package:provider/provider.dart';
 
 final _routerDelegate = BeamerDelegate(
   guards: [
     BeamGuard(
         pathBlueprints: ['/'],
         check: (context, location) {
-          return false;
+          return context.watch<UserProvider>().userState;
         },
         showPage: BeamPage(child: StartScreen()))
   ],
@@ -54,23 +56,30 @@ class TomatoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-        theme: ThemeData(
-            primarySwatch: Colors.red,
-            fontFamily: 'DoHyeon',
-            hintColor: Colors.grey.shade300,
-            textTheme: const TextTheme(button: TextStyle(color: Colors.white)),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  primary: Colors.white,
-                  minimumSize: const Size(48, 48)),
-            ),
-            appBarTheme: const AppBarTheme(
-                elevation: 2,
-                backgroundColor: Colors.white,
-                titleTextStyle: TextStyle(color: Colors.black87))),
-        routeInformationParser: BeamerParser(),
-        routerDelegate: _routerDelegate);
+    return ChangeNotifierProvider<UserProvider>(
+      create: (BuildContext context) {
+        return UserProvider();
+      },
+      child: MaterialApp.router(
+          theme: ThemeData(
+              primarySwatch: Colors.red,
+              fontFamily: 'DoHyeon',
+              hintColor: Colors.grey.shade300,
+              textTheme:
+                  const TextTheme(button: TextStyle(color: Colors.white)),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    primary: Colors.white,
+                    minimumSize: const Size(48, 48)),
+              ),
+              appBarTheme: const AppBarTheme(
+                  actionsIconTheme: IconThemeData(color: Colors.black87),
+                  elevation: 2,
+                  backgroundColor: Colors.white,
+                  titleTextStyle: TextStyle(color: Colors.black87))),
+          routeInformationParser: BeamerParser(),
+          routerDelegate: _routerDelegate),
+    );
   }
 }
