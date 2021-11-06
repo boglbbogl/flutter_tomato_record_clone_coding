@@ -1,6 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tomato_record_clone_coding/constant/common_size.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({Key? key}) : super(key: key);
@@ -8,8 +9,10 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.all(16),
+      minimum:
+          const EdgeInsets.only(left: common_padding, right: common_padding),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
             decoration: const InputDecoration(
@@ -22,25 +25,18 @@ class AddressPage extends StatelessWidget {
                   BoxConstraints(minWidth: 24, minHeight: 24),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextButton.icon(
-                icon: const Icon(CupertinoIcons.compass,
-                    color: Colors.white, size: 20),
-                onPressed: () {},
-                label: const Text(
-                  '현재 위치 찾기',
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.red,
-                ),
-              ),
-            ],
+          TextButton.icon(
+            icon: const Icon(CupertinoIcons.compass,
+                color: Colors.white, size: 20),
+            onPressed: () {},
+            label: const Text(
+              '현재 위치 찾기',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           Expanded(
             child: ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: common_padding),
                 itemCount: 30,
                 itemBuilder: (context, index) {
                   return ListTile(

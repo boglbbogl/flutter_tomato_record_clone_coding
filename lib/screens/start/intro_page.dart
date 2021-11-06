@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tomato_record_clone_coding/constant/common_size.dart';
 
 class IntroPage extends StatelessWidget {
   PageController controller;
@@ -14,7 +15,7 @@ class IntroPage extends StatelessWidget {
       final imageSzie = size.width - 32;
       return SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: common_padding),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -62,7 +63,6 @@ class IntroPage extends StatelessWidget {
                       '내 동네 설정하고 시작하기',
                       style: TextStyle(color: Colors.white),
                     ),
-                    style: TextButton.styleFrom(backgroundColor: Colors.red),
                   ),
                 ],
               ),
