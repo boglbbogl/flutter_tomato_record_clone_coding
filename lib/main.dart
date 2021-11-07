@@ -21,7 +21,7 @@ final _routerDelegate = BeamerDelegate(
 );
 
 void main() {
-  // logger.d('message');
+  Provider.debugCheckInvalidValueType = null;
   runApp(const MyApp());
 }
 

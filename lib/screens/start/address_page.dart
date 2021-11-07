@@ -6,6 +6,7 @@ import 'package:flutter_tomato_record_clone_coding/data/address_model.dart';
 import 'package:flutter_tomato_record_clone_coding/data/address_model2.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/start/address_service.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddressPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _AddressPageState extends State<AddressPage> {
   AddressModel? _addressModel;
   final List<AddressModel2> _addressModel2List = [];
   bool _isGettingLocation = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -113,7 +115,7 @@ class _AddressPageState extends State<AddressPage> {
                     }
                     return ListTile(
                         onTap: () {
-                          _saveAddressOnSharedPreferencd(_addressModel!
+                          _saveAddressAndGoToNextPage(_addressModel!
                                   .result!.items![index].address!.road ??
                               "");
                         },
@@ -140,7 +142,7 @@ class _AddressPageState extends State<AddressPage> {
                     }
                     return ListTile(
                       onTap: () {
-                        _saveAddressOnSharedPreferencd(
+                        _saveAddressAndGoToNextPage(
                             _addressModel2List[index].input!.address ?? "주소없음");
                       },
                       leading: const Icon(Icons.location_on_rounded),
@@ -156,6 +158,13 @@ class _AddressPageState extends State<AddressPage> {
         ],
       ),
     );
+  }
+
+  _saveAddressAndGoToNextPage(String address) async {
+    await _saveAddressOnSharedPreferencd(address);
+
+    context.read<PageController>().animateToPage(2,
+        duration: const Duration(milliseconds: 500), curve: Curves.ease);
   }
 
   _saveAddressOnSharedPreferencd(String address) async {

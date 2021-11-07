@@ -82,19 +82,14 @@ class _AuthPageState extends State<AuthPage> {
                   const SizedBox(height: common_sm_padding),
                   TextButton(
                     onPressed: () async {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      String address =
-                          prefs.getString('address') ?? "Not Shared Prefs";
-                      print(address);
-                      // if (_formKey.currentState != null) {
-                      //   bool passed = _formKey.currentState!.validate();
-                      //   if (passed) {
-                      //     setState(() {
-                      //       _verificationStatus = VerificationStatus.codeSent;
-                      //     });
-                      //   }
-                      // }
+                      if (_formKey.currentState != null) {
+                        bool passed = _formKey.currentState!.validate();
+                        if (passed) {
+                          setState(() {
+                            _verificationStatus = VerificationStatus.codeSent;
+                          });
+                        }
+                      }
                     },
                     child: const Text('인증문자 발송'),
                   ),

@@ -1,11 +1,10 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_tomato_record_clone_coding/constant/common_size.dart';
 
 class IntroPage extends StatelessWidget {
-  PageController controller;
-
-  IntroPage(this.controller, {Key? key}) : super(key: key);
+  const IntroPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class IntroPage extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      controller.animateToPage(1,
+                      context.read<PageController>().animateToPage(1,
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.ease);
                     },
