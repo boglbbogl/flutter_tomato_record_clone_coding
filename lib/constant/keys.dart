@@ -1,0 +1,1 @@
+const Vworld_key = "D204AF41-6754-3FD9-85AC-FD31986B39DD";
