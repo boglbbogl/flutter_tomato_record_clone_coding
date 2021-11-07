@@ -65,13 +65,19 @@ class TomatoApp extends StatelessWidget {
               primarySwatch: Colors.red,
               fontFamily: 'DoHyeon',
               hintColor: Colors.grey.shade300,
-              textTheme:
-                  const TextTheme(button: TextStyle(color: Colors.white)),
+              textTheme: const TextTheme(
+                  button: TextStyle(color: Colors.white),
+                  subtitle1: TextStyle(color: Colors.black87, fontSize: 15),
+                  subtitle2: TextStyle(color: Colors.grey, fontSize: 13)),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.red,
                     primary: Colors.white,
                     minimumSize: const Size(48, 48)),
+              ),
+              bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                selectedItemColor: Colors.red,
+                unselectedItemColor: Colors.black87,
               ),
               appBarTheme: const AppBarTheme(
                   actionsIconTheme: IconThemeData(color: Colors.black87),
