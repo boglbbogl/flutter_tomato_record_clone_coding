@@ -6,6 +6,7 @@ import 'package:flutter_tomato_record_clone_coding/data/address_model.dart';
 import 'package:flutter_tomato_record_clone_coding/data/address_model2.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/start/address_service.dart';
 import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({Key? key}) : super(key: key);
@@ -111,6 +112,11 @@ class _AddressPageState extends State<AddressPage> {
                       return Container();
                     }
                     return ListTile(
+                        onTap: () {
+                          _saveAddressOnSharedPreferencd(_addressModel!
+                                  .result!.items![index].address!.road ??
+                              "");
+                        },
                         leading: const Icon(Icons.location_on_rounded),
                         trailing: ExtendedImage.asset(
                           'assets/imgs/tomato_logo.png',
@@ -133,6 +139,10 @@ class _AddressPageState extends State<AddressPage> {
                       return Container();
                     }
                     return ListTile(
+                      onTap: () {
+                        _saveAddressOnSharedPreferencd(
+                            _addressModel2List[index].input!.address ?? "주소없음");
+                      },
                       leading: const Icon(Icons.location_on_rounded),
                       trailing: ExtendedImage.asset(
                         'assets/imgs/tomato_logo.png',
@@ -146,5 +156,10 @@ class _AddressPageState extends State<AddressPage> {
         ],
       ),
     );
+  }
+
+  _saveAddressOnSharedPreferencd(String address) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('address', address);
   }
 }

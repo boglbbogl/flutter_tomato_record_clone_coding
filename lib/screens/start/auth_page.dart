@@ -4,6 +4,7 @@ import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:flutter_tomato_record_clone_coding/constant/common_size.dart';
 import 'package:flutter_tomato_record_clone_coding/status/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -80,15 +81,20 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                   const SizedBox(height: common_sm_padding),
                   TextButton(
-                    onPressed: () {
-                      if (_formKey.currentState != null) {
-                        bool passed = _formKey.currentState!.validate();
-                        if (passed) {
-                          setState(() {
-                            _verificationStatus = VerificationStatus.codeSent;
-                          });
-                        }
-                      }
+                    onPressed: () async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      String address =
+                          prefs.getString('address') ?? "Not Shared Prefs";
+                      print(address);
+                      // if (_formKey.currentState != null) {
+                      //   bool passed = _formKey.currentState!.validate();
+                      //   if (passed) {
+                      //     setState(() {
+                      //       _verificationStatus = VerificationStatus.codeSent;
+                      //     });
+                      //   }
+                      // }
                     },
                     child: const Text('인증문자 발송'),
                   ),
