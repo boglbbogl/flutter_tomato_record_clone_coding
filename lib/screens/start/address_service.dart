@@ -77,7 +77,7 @@ class AddressService {
       AddressModel2 addressModel2 =
           AddressModel2.fromJson(response.data["response"]);
 
-      if (response.data['response']['status'] == 'OK') {
+      if (response.data["response"]['status'] == 'OK') {
         addresses.add(addressModel2);
       }
     }

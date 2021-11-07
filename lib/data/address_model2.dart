@@ -1,198 +1,262 @@
+/// status : "OK"
+/// input : {"type":"road","address":"효령로72길 60"}
+/// refined : {"text":"서울특별시 서초구 효령로72길 60 (서초동)","structure":{"level0":"대한민국","level1":"서울특별시","level2":"서초구","level3":"서초동","level4L":"효령로72길","level4LC":"","level4A":"서초2동","level4AC":"1165052000","level5":"60","detail":"한전아트센터"}}
+/// result : {"crs":"EPSG:4326","point":{"x":"127.027975025","y":"37.485553169"}}
+
 class AddressModel2 {
-  Response? response;
-
-  AddressModel2({this.response});
-
-  AddressModel2.fromJson(Map<String, dynamic> json) {
-    this.response =
-        json["response"] == null ? null : Response.fromJson(json["response"]);
+  AddressModel2({
+    String? status,
+    Input? input,
+    Refined? refined,
+    // Result? result,
+  }) {
+    _status = status;
+    _input = input;
+    _refined = refined;
+    // _result = result;
   }
 
+  AddressModel2.fromJson(dynamic json) {
+    _status = json['status'];
+    _input = json['input'] != null ? Input.fromJson(json['input']) : null;
+    _refined =
+        json['refined'] != null ? Refined.fromJson(json['refined']) : null;
+    // _result = json['result'] != null ? Result.fromJson(json['result']) : null;
+  }
+  String? _status;
+  Input? _input;
+  Refined? _refined;
+  // Result? _result;
+
+  String? get status => _status;
+  Input? get input => _input;
+  Refined? get refined => _refined;
+  // Result? get result => _result;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.response != null) data["response"] = this.response!.toJson();
-    return data;
+    final map = <String, dynamic>{};
+    map['status'] = _status;
+    if (_input != null) {
+      map['input'] = _input?.toJson();
+    }
+    if (_refined != null) {
+      map['refined'] = _refined?.toJson();
+    }
+    // if (_result != null) {
+    //   map['result'] = _result?.toJson();
+    // }
+    return map;
   }
 }
 
-class Response {
-  String? status;
-  Input? input;
-  Refined? refined;
-  Result? result;
+/// crs : "EPSG:4326"
+/// point : {"x":"127.027975025","y":"37.485553169"}
 
-  Response({this.status, this.input, this.refined, this.result});
-
-  Response.fromJson(Map<String, dynamic> json) {
-    status = json["status"];
-    input = json["input"] == null ? null : Input.fromJson(json["input"]);
-    refined =
-        json["refined"] == null ? null : Refined.fromJson(json["refined"]);
-    result = json["result"] == null ? null : Result.fromJson(json["result"]);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-
-    if (input != null) data["input"] = input!.toJson();
-    if (refined != null) data["refined"] = refined!.toJson();
-    if (result != null) data["result"] = result!.toJson();
-    return data;
-  }
-}
-
-class Result {
-  String? crs;
-  Point? point;
-
-  Result({this.crs, this.point});
-
-  Result.fromJson(Map<String, dynamic> json) {
-    crs = json["crs"];
-    point = json["point"] == null ? null : Point.fromJson(json["point"]);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data["crs"] = crs;
-    if (point != null) data["point"] = point!.toJson();
-    return data;
-  }
-}
-
-class Point {
-  String? x;
-  String? y;
-
-  Point({this.x, this.y});
-
-  Point.fromJson(Map<String, dynamic> json) {
-    x = json["x"];
-    y = json["y"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data["x"] = x;
-    data["y"] = y;
-    return data;
-  }
-}
-
-class Refined {
-  String? text;
-  Structure? structure;
-
-  Refined({this.text, this.structure});
-
-  Refined.fromJson(Map<String, dynamic> json) {
-    text = json["text"];
-    structure = json["structure"] == null
-        ? null
-        : Structure.fromJson(json["structure"]);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data["text"] = text;
-    if (structure != null) data["structure"] = structure!.toJson();
-    return data;
-  }
-}
-
-class Structure {
-  String? level0;
-  String? level1;
-  String? level2;
-  String? level3;
-  String? level4L;
-  String? level4Lc;
-  String? level4A;
-  String? level4Ac;
-  String? level5;
-  String? detail;
-
-  Structure(
-      {this.level0,
-      this.level1,
-      this.level2,
-      this.level3,
-      this.level4L,
-      this.level4Lc,
-      this.level4A,
-      this.level4Ac,
-      this.level5,
-      this.detail});
-
-  Structure.fromJson(Map<String, dynamic> json) {
-    level0 = json["level0"];
-    level1 = json["level1"];
-    level2 = json["level2"];
-    level3 = json["level3"];
-    level4L = json["level4L"];
-    level4Lc = json["level4LC"];
-    level4A = json["level4A"];
-    level4Ac = json["level4AC"];
-    level5 = json["level5"];
-    detail = json["detail"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data["level0"] = level0;
-    data["level1"] = level1;
-    data["level2"] = level2;
-    data["level3"] = level3;
-    data["level4L"] = level4L;
-    data["level4LC"] = level4Lc;
-    data["level4A"] = level4A;
-    data["level4AC"] = level4Ac;
-    data["level5"] = level5;
-    data["detail"] = detail;
-    return data;
-  }
-}
-
-class Input {
-  String? type;
-  String? address;
-
-  Input({this.type, this.address});
-
-  Input.fromJson(Map<String, dynamic> json) {
-    type = json["type"];
-    address = json["address"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data["type"] = type;
-    data["address"] = address;
-    return data;
-  }
-}
-
-// class Service {
-//   String name;
-//   String version;
-//   String operation;
-//   String time;
-
-//   Service({this.name, this.version, this.operation, this.time});
-
-//   Service.fromJson(Map<String, dynamic> json) {
-//     this.name = json["name"];
-//     this.version = json["version"];
-//     this.operation = json["operation"];
-//     this.time = json["time"];
+// class Result {
+//   Result({
+//     String? crs,
+//     Point? point,
+//   }) {
+//     _crs = crs;
+//     _point = point;
 //   }
+
+//   Result.fromJson(dynamic json) {
+//     _crs = json['crs'];
+//     _point = json['point'] != null ? Point.fromJson(json['point']) : null;
+//   }
+//   String? _crs;
+//   Point? _point;
+
+//   String? get crs => _crs;
+//   Point? get point => _point;
 
 //   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data["name"] = this.name;
-//     data["version"] = this.version;
-//     data["operation"] = this.operation;
-//     data["time"] = this.time;
-//     return data;
+//     final map = <String, dynamic>{};
+//     map['crs'] = _crs;
+//     if (_point != null) {
+//       map['point'] = _point?.toJson();
+//     }
+//     return map;
 //   }
 // }
+
+/// x : "127.027975025"
+/// y : "37.485553169"
+
+class Point {
+  Point({
+    String? x,
+    String? y,
+  }) {
+    _x = x;
+    _y = y;
+  }
+
+  Point.fromJson(dynamic json) {
+    _x = json['x'];
+    _y = json['y'];
+  }
+  String? _x;
+  String? _y;
+
+  String? get x => _x;
+  String? get y => _y;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['x'] = _x;
+    map['y'] = _y;
+    return map;
+  }
+}
+
+/// text : "서울특별시 서초구 효령로72길 60 (서초동)"
+/// structure : {"level0":"대한민국","level1":"서울특별시","level2":"서초구","level3":"서초동","level4L":"효령로72길","level4LC":"","level4A":"서초2동","level4AC":"1165052000","level5":"60","detail":"한전아트센터"}
+
+class Refined {
+  Refined({
+    String? text,
+    Structure? structure,
+  }) {
+    _text = text;
+    _structure = structure;
+  }
+
+  Refined.fromJson(dynamic json) {
+    _text = json['text'];
+    _structure = json['structure'] != null
+        ? Structure.fromJson(json['structure'])
+        : null;
+  }
+  String? _text;
+  Structure? _structure;
+
+  String? get text => _text;
+  Structure? get structure => _structure;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['text'] = _text;
+    if (_structure != null) {
+      map['structure'] = _structure?.toJson();
+    }
+    return map;
+  }
+}
+
+/// level0 : "대한민국"
+/// level1 : "서울특별시"
+/// level2 : "서초구"
+/// level3 : "서초동"
+/// level4L : "효령로72길"
+/// level4LC : ""
+/// level4A : "서초2동"
+/// level4AC : "1165052000"
+/// level5 : "60"
+/// detail : "한전아트센터"
+
+class Structure {
+  Structure({
+    String? level0,
+    String? level1,
+    String? level2,
+    String? level3,
+    String? level4L,
+    String? level4LC,
+    String? level4A,
+    String? level4AC,
+    String? level5,
+    String? detail,
+  }) {
+    _level0 = level0;
+    _level1 = level1;
+    _level2 = level2;
+    _level3 = level3;
+    _level4L = level4L;
+    _level4LC = level4LC;
+    _level4A = level4A;
+    _level4AC = level4AC;
+    _level5 = level5;
+    _detail = detail;
+  }
+
+  Structure.fromJson(dynamic json) {
+    _level0 = json['level0'];
+    _level1 = json['level1'];
+    _level2 = json['level2'];
+    _level3 = json['level3'];
+    _level4L = json['level4L'];
+    _level4LC = json['level4LC'];
+    _level4A = json['level4A'];
+    _level4AC = json['level4AC'];
+    _level5 = json['level5'];
+    _detail = json['detail'];
+  }
+  String? _level0;
+  String? _level1;
+  String? _level2;
+  String? _level3;
+  String? _level4L;
+  String? _level4LC;
+  String? _level4A;
+  String? _level4AC;
+  String? _level5;
+  String? _detail;
+
+  String? get level0 => _level0;
+  String? get level1 => _level1;
+  String? get level2 => _level2;
+  String? get level3 => _level3;
+  String? get level4L => _level4L;
+  String? get level4LC => _level4LC;
+  String? get level4A => _level4A;
+  String? get level4AC => _level4AC;
+  String? get level5 => _level5;
+  String? get detail => _detail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['level0'] = _level0;
+    map['level1'] = _level1;
+    map['level2'] = _level2;
+    map['level3'] = _level3;
+    map['level4L'] = _level4L;
+    map['level4LC'] = _level4LC;
+    map['level4A'] = _level4A;
+    map['level4AC'] = _level4AC;
+    map['level5'] = _level5;
+    map['detail'] = _detail;
+    return map;
+  }
+}
+
+/// type : "road"
+/// address : "효령로72길 60"
+
+class Input {
+  Input({
+    String? type,
+    String? address,
+  }) {
+    _type = type;
+    _address = address;
+  }
+
+  Input.fromJson(dynamic json) {
+    _type = json['type'];
+    _address = json['address'];
+  }
+  String? _type;
+  String? _address;
+
+  String? get type => _type;
+  String? get address => _address;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['type'] = _type;
+    map['address'] = _address;
+    return map;
+  }
+}
