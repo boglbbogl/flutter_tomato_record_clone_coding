@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/home/items_page.dart';
 
@@ -29,7 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
           style: Theme.of(context).textTheme.headline5,
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined)),
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.search_outlined)),
           IconButton(
               onPressed: () {},
               icon: const Icon(Icons.format_align_justify_outlined)),

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "925505056632",
+    "project_id": "flutter-tomato-record-clone",
+    "storage_bucket": "flutter-tomato-record-clone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925505056632:android:108ffca9f63e083348628d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_tomato_record_clone_coding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925505056632-etnicdt5p1ug1gj5lmq9ivfp5heh38df.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_tomato_record_clone_coding",
+            "certificate_hash": "1ed9caf2e71816c648e5fe536daf668db103a2de"
+          }
+        },
+        {
+          "client_id": "925505056632-c3qa48qrckjod04q0f34tf0dthk0g7t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZU-qsBWpvbFK4_qCbEKRVsVxvEHOMQCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925505056632-c3qa48qrckjod04q0f34tf0dthk0g7t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

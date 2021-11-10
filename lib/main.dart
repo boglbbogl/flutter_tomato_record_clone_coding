@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tomato_record_clone_coding/router/locations.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/start_screen.dart';
@@ -11,7 +12,7 @@ final _routerDelegate = BeamerDelegate(
     BeamGuard(
         pathBlueprints: ['/'],
         check: (context, location) {
-          return context.watch<UserProvider>().userState;
+          return context.watch<UserProvider>().user != null;
         },
         showPage: BeamPage(child: StartScreen()))
   ],
@@ -20,7 +21,9 @@ final _routerDelegate = BeamerDelegate(
   ]),
 );
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Provider.debugCheckInvalidValueType = null;
   runApp(const MyApp());
 }
