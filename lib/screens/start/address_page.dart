@@ -2,6 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tomato_record_clone_coding/constant/common_size.dart';
+import 'package:flutter_tomato_record_clone_coding/constant/shared_pref_keys.dart';
 import 'package:flutter_tomato_record_clone_coding/data/address_model.dart';
 import 'package:flutter_tomato_record_clone_coding/data/address_model2.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/start/address_service.dart';
@@ -115,9 +116,16 @@ class _AddressPageState extends State<AddressPage> {
                     }
                     return ListTile(
                         onTap: () {
-                          _saveAddressAndGoToNextPage(_addressModel!
-                                  .result!.items![index].address!.road ??
-                              "");
+                          _saveAddressAndGoToNextPage(
+                              _addressModel!
+                                      .result!.items![index].address!.road ??
+                                  "",
+                              num.parse(_addressModel!
+                                      .result!.items![index].point!.y ??
+                                  "0"),
+                              num.parse(_addressModel!
+                                      .result!.items![index].point!.x ??
+                                  "0"));
                         },
                         leading: const Icon(Icons.location_on_rounded),
                         trailing: ExtendedImage.asset(
@@ -143,7 +151,9 @@ class _AddressPageState extends State<AddressPage> {
                     return ListTile(
                       onTap: () {
                         _saveAddressAndGoToNextPage(
-                            _addressModel2List[index].input!.address ?? "주소없음");
+                            _addressModel2List[index].input!.address ?? "주소없음",
+                            0,
+                            0);
                       },
                       leading: const Icon(Icons.location_on_rounded),
                       trailing: ExtendedImage.asset(
@@ -160,15 +170,17 @@ class _AddressPageState extends State<AddressPage> {
     );
   }
 
-  _saveAddressAndGoToNextPage(String address) async {
-    await _saveAddressOnSharedPreferencd(address);
+  _saveAddressAndGoToNextPage(String address, num lat, num lon) async {
+    await _saveAddressOnSharedPreferencd(address, lat, lon);
 
     context.read<PageController>().animateToPage(2,
         duration: const Duration(milliseconds: 500), curve: Curves.ease);
   }
 
-  _saveAddressOnSharedPreferencd(String address) async {
+  _saveAddressOnSharedPreferencd(String address, num lat, num lon) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('address', address);
+    await prefs.setString(SHARED_ADDRESS, address);
+    await prefs.setDouble(SHARED_LAT, lat.toDouble());
+    await prefs.setDouble(SHARED_LON, lon.toDouble());
   }
 }

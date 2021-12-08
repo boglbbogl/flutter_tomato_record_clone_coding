@@ -18,6 +18,7 @@ final _routerDelegate = BeamerDelegate(
   ],
   locationBuilder: BeamerLocationBuilder(beamLocations: [
     HomeLocation(),
+    InputLocation(),
   ]),
 );
 
@@ -71,7 +72,11 @@ class TomatoApp extends StatelessWidget {
               textTheme: const TextTheme(
                   button: TextStyle(color: Colors.white),
                   subtitle1: TextStyle(color: Colors.black87, fontSize: 15),
-                  subtitle2: TextStyle(color: Colors.grey, fontSize: 13)),
+                  subtitle2: TextStyle(color: Colors.grey, fontSize: 13),
+                  bodyText2: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300)),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.red,
@@ -84,6 +89,7 @@ class TomatoApp extends StatelessWidget {
               ),
               appBarTheme: const AppBarTheme(
                   actionsIconTheme: IconThemeData(color: Colors.black87),
+                  foregroundColor: Colors.black87,
                   elevation: 2,
                   backgroundColor: Colors.white,
                   titleTextStyle: TextStyle(color: Colors.black87))),

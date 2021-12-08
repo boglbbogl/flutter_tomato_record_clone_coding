@@ -1,6 +1,8 @@
+import 'package:beamer/src/beamer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tomato_record_clone_coding/screens/home/items_page.dart';
+import 'package:flutter_tomato_record_clone_coding/widgets/expandable_fab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,6 +25,31 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(color: Colors.accents[1]),
         ],
       ),
+      floatingActionButton: ExpandableFab(distance: 90, children: [
+        MaterialButton(
+          onPressed: () {
+            context.beamToNamed('/input');
+          },
+          shape: CircleBorder(),
+          height: 36,
+          color: Theme.of(context).colorScheme.primary,
+          child: Icon(Icons.add),
+        ),
+        MaterialButton(
+          onPressed: () {},
+          shape: CircleBorder(),
+          height: 36,
+          color: Theme.of(context).colorScheme.primary,
+          child: Icon(Icons.add),
+        ),
+        MaterialButton(
+          onPressed: () {},
+          shape: CircleBorder(),
+          height: 36,
+          color: Theme.of(context).colorScheme.primary,
+          child: Icon(Icons.add),
+        ),
+      ]),
       appBar: AppBar(
         centerTitle: false,
         title: Text(
